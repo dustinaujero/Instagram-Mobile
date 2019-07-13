@@ -16,7 +16,8 @@ class FeedPost extends React.Component {
         super(props);
 
         this.state = {
-            liked: false
+            liked: false,
+            likes: 20
         }
     }
     toggleLike() {
@@ -42,15 +43,13 @@ class FeedPost extends React.Component {
                 <Icon name="dots-horizontal" size={25}/>
             </View>
 
-                <TouchableOpacity activeOpacity={0.8} style={styles.feedPostImage} onPress={() => this.toggleLike()} >
-                {/* <View> */}
-                    <Image
-                        style={styles.feedPostImage}
-                        source={{
-                            uri: "https://i.kinja-img.com/gawker-media/image/upload/s--4vlfc0Vs--/c_scale,f_auto,fl_progressive,q_80,w_800/zhdfbwvbc2miyqyaryl9.jpg"
-                        }}
-                    />
-                {/* </View> */}
+            <TouchableOpacity activeOpacity={0.8} style={styles.feedPostImage} onPress={() => this.toggleLike()} >
+                <Image
+                    style={styles.feedPostImage}
+                    source={{
+                        uri: "https://i.kinja-img.com/gawker-media/image/upload/s--4vlfc0Vs--/c_scale,f_auto,fl_progressive,q_80,w_800/zhdfbwvbc2miyqyaryl9.jpg"
+                    }}
+                />
             </TouchableOpacity>
 
             <View style={styles.postIconView}>
@@ -60,6 +59,12 @@ class FeedPost extends React.Component {
                     source={require('../../../assets/download.png')}
                 />
             </View>
+
+            <View style={styles.likeView}>
+                <Text style={styles.likeText}>
+                    {this.state.likes.toString()} likes
+                </Text>
+            </View>
         </View>
         );
     }
@@ -68,7 +73,7 @@ class FeedPost extends React.Component {
 const styles = StyleSheet.create({
     post: {
         width: 100 + "%",
-        height: 330,
+        height: 350,
         // backgroundColor: "#E2E371",
         alignItems: 'center',
     },
@@ -93,14 +98,20 @@ const styles = StyleSheet.create({
     postIconView: { 
         width: 100 + "%", 
         flexDirection: "row", 
-        borderBottomColor: "#000", 
-        borderBottomWidth: StyleSheet.hairlineWidth, 
+        // borderBottomColor: "#000", 
+        // borderBottomWidth: StyleSheet.hairlineWidth, 
         flex: 1,
         alignItems: "center",
         overflow: "hidden"
+    },
+    likeView: {
+        width: 100 + "%",
+        paddingLeft: 11,
+        fontWeight: "bold"
+    },
+    likeText: {
+        fontWeight: "bold"
     }
-
-    
 });
 
 export default FeedPost;
